@@ -13,10 +13,12 @@ public:
     {
     Data = ArrayName;
     this->SizeArray=SizeArray;
-    MergeDivide(0,SizeArray);
-    MergePrint();
-
+    //MergeDivide(0,SizeArray);
+    //
+    QuickSort(0, SizeArray);
+MergePrint();
     }
+    void QuickSort(int low, int high);
     void MergeDivide(int low,int high);
     void MergeCombine(int low, int mid, int high);
     void MergePrint()
@@ -28,6 +30,46 @@ public:
 
     }
 };
+
+template<class  T>
+void MergeSort<T>::QuickSort(int left, int right)
+{  int low = left;
+    int high  = right;
+int mid = Data[(low +high)/2];
+while(low <= high)
+{
+while(Data[low] < mid)
+{//std::cout<<Data[low] << "   part1" <<std::endl;
+low ++;
+}
+while(Data[high] > mid)
+{//std::cout<<Data[high] << "   part2" <<std::endl;
+high --;
+}
+if ( low <= high)
+{
+
+int temp = Data[low];
+Data[low] = Data[high];
+Data[high] = temp;
+high --;
+low ++;
+}
+
+
+}
+if(left < high)
+{
+QuickSort(left , high);
+}
+if(low < right)
+{
+QuickSort(low , right);
+}
+
+
+
+}
 
 template<class  T>
 void MergeSort<T>::MergeDivide(int low, int high)
